@@ -1,22 +1,66 @@
+// migrations/xxxxxx-create-acceso.js
 'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Acceso', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      persona_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Persona',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      metodo_acceso_id_1: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'MetodoAcceso',
+          key: 'id'
+        }
+      },
+      metodo_acceso_id_2: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'MetodoAcceso',
+          key: 'id'
+        },
+        allowNull: true
+      },
+      metodo_acceso_id_3: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'MetodoAcceso',
+          key: 'id'
+        },
+        allowNull: true
+      },
+      num_barreras: {
+        type: Sequelize.INTEGER
+      },
+      valido_desde: {
+        type: Sequelize.DATE
+      },
+      valido_hasta: {
+        type: Sequelize.DATE
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
   },
-
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Acceso');
   }
 };

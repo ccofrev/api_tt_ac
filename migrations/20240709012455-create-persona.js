@@ -1,3 +1,4 @@
+// migrations/xxxxxx-create-persona.js
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {

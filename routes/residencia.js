@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
 
 // Obtener todas las residencias
 router.get('/', async (req, res) => {
-
   try {
     const { page = 1, perPage = 10 } = req.query;
 

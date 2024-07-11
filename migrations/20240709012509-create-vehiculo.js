@@ -24,10 +24,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      tipo: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       persona_id: {
         type: Sequelize.INTEGER,
         references: {

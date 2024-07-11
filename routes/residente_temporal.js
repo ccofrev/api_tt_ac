@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
     });
 
     res.header('X-Total-Count', count.toString()); // Incluir el encabezado X-Total-Count
-    res.header('Content-Range', `residencia_temporal ${offset}-${offset + rows.length}/${count}`); // Incluir el encabezado Content-Range
+    res.header('Content-Range', `residentes_temporales ${offset}-${offset + rows.length}/${count}`); // Incluir el encabezado Content-Range
     res.header('Access-Control-Expose-Headers', 'X-Total-Count, Content-Range'); // Permitir que el encabezado sea accesible desde el cliente
     res.status(200).json(rows);
   } catch (error) {

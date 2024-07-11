@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     tipo: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    dato: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   }, {
     tableName: 'MetodoAcceso' // Nombre correcto de la tabla

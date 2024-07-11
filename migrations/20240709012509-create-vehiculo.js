@@ -1,34 +1,20 @@
-// migrations/xxxxxx-create-vehiculo.js
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Vehiculo', {
+    await queryInterface.createTable('Vehiculo', { // Nombre correcto de la tabla
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      matricula: {
-        type: Sequelize.STRING
-      },
       modelo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      marca: {
-        type: Sequelize.STRING
-      },
-      color: {
-        type: Sequelize.STRING
-      },
-      persona_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Persona',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+      ruta: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +27,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Vehiculo');
+    await queryInterface.dropTable('Vehiculo'); // Nombre correcto de la tabla
   }
 };

@@ -15,8 +15,19 @@ router.post('/', async (req, res) => {
 // Obtener todas las personas
 router.get('/', async (req, res) => {
   try {
-    const personas = await Persona.findAll();
-    res.status(200).json(personas);
+    const { page = 1, perPage = 10 } = req.query; // Obtener los parámetros de paginación
+
+    const offset = (page - 1) * perPage;
+    const limit = parseInt(perPage, 10);
+
+    const { count, rows } = await Persona.findAndCountAll({
+      offset,
+      limit
+    });
+
+    res.header('X-Total-Count', count); // Incluir el encabezado X-Total-Count
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count'); // Permitir que el encabezado sea accesible desde el cliente
+    res.status(200).json(rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,8 +1,7 @@
-// migrations/xxxxxx-create-metodo-acceso.js
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('MetodoAcceso', {
+    await queryInterface.createTable('MetodoAcceso', { // Nombre correcto de la tabla
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,7 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       tipo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      dato: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -23,6 +27,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('MetodoAcceso');
+    await queryInterface.dropTable('MetodoAcceso'); // Nombre correcto de la tabla
   }
 };

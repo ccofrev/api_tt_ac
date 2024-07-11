@@ -15,8 +15,20 @@ router.post('/', async (req, res) => {
 // Obtener todos los dispositivos
 router.get('/', async (req, res) => {
   try {
-    const dispositivos = await Dispositivo.findAll();
-    res.status(200).json(dispositivos);
+    const { page = 1, perPage = 10 } = req.query;
+
+    const offset = (page - 1) * perPage;
+    const limit = parseInt(perPage, 10);
+
+    const { count, rows } = await Dispositivo.findAndCountAll({
+      offset,
+      limit
+    });
+
+    res.header('X-Total-Count', count.toString()); // Incluir el encabezado X-Total-Count
+    res.header('Content-Range', `dispositivo ${offset}-${offset + rows.length}/${count}`); // Incluir el encabezado Content-Range
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count, Content-Range'); // Permitir que el encabezado sea accesible desde el cliente
+    res.status(200).json(rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

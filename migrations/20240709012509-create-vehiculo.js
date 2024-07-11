@@ -8,13 +8,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      matricula: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       modelo: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      ruta: {
+      marca: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      color: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      tipo: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      persona_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Personas', // Nombre de la tabla a la que hace referencia
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

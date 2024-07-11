@@ -1,8 +1,7 @@
-// migrations/xxxxxx-create-residente-temporal.js
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ResidenteTemporal', {
+    await queryInterface.createTable('ResidenteTemporal', { // Nombre correcto de la tabla
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,18 +10,19 @@ module.exports = {
       },
       residente_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Residente',
+          model: 'Residente', // Nombre de la tabla a la que hace referencia
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        }
       },
       fecha_inicio: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       fecha_fin: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ResidenteTemporal');
+    await queryInterface.dropTable('ResidenteTemporal'); // Nombre correcto de la tabla
   }
 };

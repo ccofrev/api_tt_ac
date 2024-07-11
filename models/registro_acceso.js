@@ -1,21 +1,33 @@
-// models/registro_acceso.js
 module.exports = (sequelize, DataTypes) => {
-    const RegistroAcceso = sequelize.define('RegistroAcceso', {
-      acceso_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Acceso',
-          key: 'id'
-        }
+  const RegistroAcceso = sequelize.define('RegistroAcceso', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    acceso_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Acceso',
+        key: 'id'
       },
-      tipo_acceso: DataTypes.STRING,
-      fecha_hora: DataTypes.DATE
-    });
-  
-    RegistroAcceso.associate = function(models) {
-      RegistroAcceso.belongsTo(models.Acceso, { foreignKey: 'acceso_id' });
-    };
-  
-    return RegistroAcceso;
+      allowNull: false
+    },
+    timestamp: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    tipo: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    tableName: 'RegistroAcceso' // Nombre correcto de la tabla
+  });
+
+  RegistroAcceso.associate = (models) => {
+    RegistroAcceso.belongsTo(models.Acceso, { foreignKey: 'acceso_id', as: 'acceso' });
   };
-  
+
+  return RegistroAcceso;
+};

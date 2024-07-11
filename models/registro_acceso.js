@@ -13,11 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       allowNull: false
     },
-    timestamp: {
+    fecha_hora: {
       type: DataTypes.DATE,
       allowNull: false
     },
     tipo: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    creado_por: {
       type: DataTypes.STRING,
       allowNull: false
     }

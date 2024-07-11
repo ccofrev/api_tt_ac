@@ -1,23 +1,30 @@
-// models/residente.js
 module.exports = (sequelize, DataTypes) => {
-    const Residente = sequelize.define('Residente', {
-      residencia_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Residencia',
-          key: 'id'
-        }
-      },
-      rol_residencia: DataTypes.STRING
-    });
-  
-    Residente.associate = function(models) {
-      Residente.belongsTo(models.Residencia, { foreignKey: 'residencia_id' });
-      Residente.belongsTo(models.Persona, { foreignKey: 'id' });
-      Residente.hasMany(models.Usuario, { foreignKey: 'id' });
-      Residente.hasMany(models.ResidenteTemporal, { foreignKey: 'id' });
-    };
-  
-    return Residente;
+  const Residente = sequelize.define('Residente', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    persona_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    residencia_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    rol_residencia: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    tableName: 'Residente' // Nombre correcto de la tabla
+  });
+
+  Residente.associate = (models) => {
+    Residente.belongsTo(models.Persona, { foreignKey: 'persona_id', as: 'persona' });
+    Residente.belongsTo(models.Residencia, { foreignKey: 'residencia_id', as: 'residencia' });
   };
-  
+
+  return Residente;
+};

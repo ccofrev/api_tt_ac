@@ -1,8 +1,7 @@
-// migrations/xxxxxx-create-residente.js
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Residente', {
+    await queryInterface.createTable('Residente', { // Nombre correcto de la tabla
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,24 +10,23 @@ module.exports = {
       },
       persona_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Persona',
+          model: 'Personas', // Nombre de la tabla a la que hace referencia
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        }
       },
       residencia_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Residencia',
+          model: 'Residencias', // Nombre de la tabla a la que hace referencia
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        }
       },
       rol_residencia: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +39,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Residente');
+    await queryInterface.dropTable('Residente'); // Nombre correcto de la tabla
   }
 };

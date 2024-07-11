@@ -1,22 +1,21 @@
-// models/metodo_acceso.js
 module.exports = (sequelize, DataTypes) => {
-    const MetodoAcceso = sequelize.define('MetodoAcceso', {
-      tipo: DataTypes.STRING,
-      dato: DataTypes.STRING,
-      dispositivo_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Dispositivo',
-          key: 'id'
-        },
-        allowNull: true
-      }
-    });
-  
-    MetodoAcceso.associate = function(models) {
-      MetodoAcceso.belongsTo(models.Dispositivo, { foreignKey: 'dispositivo_id' });
-    };
-  
-    return MetodoAcceso;
-  };
-  
+  const MetodoAcceso = sequelize.define('MetodoAcceso', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    tipo: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    dato: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    tableName: 'MetodoAcceso' // Nombre correcto de la tabla
+  });
+
+  return MetodoAcceso;
+};

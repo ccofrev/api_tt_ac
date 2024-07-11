@@ -15,8 +15,20 @@ router.post('/', async (req, res) => {
 // Obtener todos los métodos de acceso
 router.get('/', async (req, res) => {
   try {
-    const metodosAcceso = await MetodoAcceso.findAll();
-    res.status(200).json(metodosAcceso);
+    const { page = 1, perPage = 10 } = req.query;
+
+    const offset = (page - 1) * perPage;
+    const limit = parseInt(perPage, 10);
+
+    const { count, rows } = await MetodoAcceso.findAndCountAll({
+      offset,
+      limit
+    });
+
+    res.header('X-Total-Count', count.toString()); // Incluir el encabezado X-Total-Count
+    res.header('Content-Range', `metodo_acceso ${offset}-${offset + rows.length}/${count}`); // Incluir el encabezado Content-Range
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count, Content-Range'); // Permitir que el encabezado sea accesible desde el cliente
+    res.status(200).json(rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
